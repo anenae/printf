@@ -1,34 +1,3 @@
-Skip to content
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@anenae 
-musangisilvia
-/
-printf
-1
-01
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-printf/holberton.h
-@musangisilvia
-musangisilvia make us get 65
-Latest commit d72dab3 on 17 Mar
- History
- 2 contributors
-@muindetuva@musangisilvia
-37 lines (33 sloc)  943 Bytes
-  
 #ifndef HOLBERTON_H
 #define HOLBERTON_H
 
@@ -66,16 +35,3 @@ int print_binary(unsigned int, int);
 int print_Str(va_list args, int len);
 
 #endif
-© 2021 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
-Loading complete{"mode":"full","isActive":false}
