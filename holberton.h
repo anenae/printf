@@ -2,36 +2,35 @@
 #define HOLBERTON_H
 
 #include <stdarg.h>
-#include <stdlib.h>
+#include <stddef.h>
 
 /**
-  *struct directives - holds fromat specifiers and their functions.
-  *@spec: char.
-  *@fspec: function pointer.
-  *
-  */
-typedef struct directives
+ * struct id_func - Struct id_func
+ *
+ * @id: identifier.
+ * @f: corresponding function.
+ */
+typedef struct id_func
 {
-	char spec;
-	int (*fspec)(va_list, int);
-} forms;
+	char *id;
+	int (*f)(va_list);
+} id_f;
 
 int _putchar(char c);
 int _printf(const char *format, ...);
-int (*get_print_func(char c))(va_list, int);
-int print_ch(va_list, int);
-int print_str(va_list, int);
-int print_int(va_list, int);
-int _putchar_int(int, int);
-int print_numbers(unsigned long n, unsigned int base, const char *digits);
-unsigned int find_length(unsigned int, int);
-int print_hex(va_list args, int len);
-int print_heX(va_list args, int len);
-int print_unsignd(va_list args, int len);
-int print_octal(va_list args, int len);
-int print_rot13(va_list args, int len);
-int print_b(va_list args, int len);
-int print_binary(unsigned int, int);
-int print_Str(va_list args, int len);
-
+int p_char(va_list ap);
+int p_str(va_list ap);
+int p_int(va_list ap);
+int p_dec(va_list ap);
+int p_binary(va_list ap);
+int p_udec(va_list ap);
+int p_Xhex(va_list ap);
+int p_xhex(va_list ap);
+int p_oct(va_list ap);
+int p_udec(va_list ap);
+int p_S(va_list ap);
+int p_p(va_list ap);
+unsigned long _pow(unsigned int b, unsigned int e);
+int p_r(va_list ap);
+int p_R(va_list ap);
 #endif
