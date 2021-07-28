@@ -1,71 +1,81 @@
-#ifndef _FUNCTION_PRINTF_H_
-#define _FUNCTION_PRINTF_H_
+Skip to content
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@anenae 
+musangisilvia
+/
+printf
+1
+01
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+printf/holberton.h
+@musangisilvia
+musangisilvia make us get 65
+Latest commit d72dab3 on 17 Mar
+ History
+ 2 contributors
+@muindetuva@musangisilvia
+37 lines (33 sloc)  943 Bytes
+  
+#ifndef HOLBERTON_H
+#define HOLBERTON_H
+
 #include <stdarg.h>
 #include <stdlib.h>
-#include <stddef.h>
-
-#define BUFFER_SIZE 1024
 
 /**
- * struct modifier - mofifier fields collection
- * @flags: flags field composed of ['0', ' ', '#', '+', '-']
- * @width: width field, positive number
- * @precision: precision field positive number not including '.'
- * or -1 for '*'
- * @length: length field string composed of ['h', 'l']
- * @specifier: specifier character can one of
- * ['c', 's', '%', 'd', 'i', 'b', 'u', 'o', 'x', 'X', 'S', 'p', 'r', 'R']
- *
- */
-typedef struct modifier
+  *struct directives - holds fromat specifiers and their functions.
+  *@spec: char.
+  *@fspec: function pointer.
+  *
+  */
+typedef struct directives
 {
-  char *flags;
-  int width;
-  int precision;
-  char *length;
-  char specifier;
-} modifier_t;
+	char spec;
+	int (*fspec)(va_list, int);
+} forms;
 
-void *_realloc(void *ptr, unsigned int, unsigned int);
 int _putchar(char c);
-char *print_binary(modifier_t *, va_list);
-char *print_unsigned_int(modifier_t *, va_list);
-char *print_octal(modifier_t *, va_list);
-char *print_hex(modifier_t *, va_list);
-char *print_char(modifier_t *, va_list ap);
-char *print_int(modifier_t *, va_list ap);
-char *print_string(modifier_t *modif, va_list ap);
-char *print_rev(modifier_t *, va_list ap);
-char *print_big_s(modifier_t *, va_list);
-char *print_pointer(modifier_t *, va_list);
-char *rot13(char *s);
-int _strlen(char *s);
-char *print_rot(modifier_t *, va_list ap);
-
-void free_modifier(modifier_t *);
-char *get_flags(const char *, unsigned int *);
-int get_width(const char *, unsigned int *);
-int get_precision(const char *, unsigned int *);
-char *get_length(const char *, unsigned int *);
-char get_specifier(const char *, unsigned int *);
-modifier_t *get_modifier(const char *, unsigned int *);
-char *treat_format(const char *, unsigned int *, va_list);
 int _printf(const char *format, ...);
-char *_strcpy(char *dest, char *src);
-void array_rev(char *arr, int len);
-int int_len(int num);
-char *ito(int n);
-char *reverse(char *s);
-
-/**
- * struct print - multiple choice print
- * @f: char Type of print
- * @func: funct
- */
-typedef struct print
-{
-  char f;
-  char *(*func)(modifier_t *, va_list);
-} t_print;
+int (*get_print_func(char c))(va_list, int);
+int print_ch(va_list, int);
+int print_str(va_list, int);
+int print_int(va_list, int);
+int _putchar_int(int, int);
+int print_numbers(unsigned long n, unsigned int base, const char *digits);
+unsigned int find_length(unsigned int, int);
+int print_hex(va_list args, int len);
+int print_heX(va_list args, int len);
+int print_unsignd(va_list args, int len);
+int print_octal(va_list args, int len);
+int print_rot13(va_list args, int len);
+int print_b(va_list args, int len);
+int print_binary(unsigned int, int);
+int print_Str(va_list args, int len);
 
 #endif
+© 2021 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+Loading complete{"mode":"full","isActive":false}
