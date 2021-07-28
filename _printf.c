@@ -1,83 +1,50 @@
-#include <unistd.h>
 #include "holberton.h"
-#include <stdio.h>
-
 /**
- * buffer_print - print given buffer to stdout
- * @buffer: buffer to print
- * @nbytes: number of bytes to print
- *
- * Return: nbytes
- */
-int buffer_print(char buffer[], unsigned int nbytes)
-{
-	write(1, buffer, nbytes);
-	return (nbytes);
-}
-
-/**
- * buffer_add - adds a string to buffer
- * @buffer: buffer to fill
- * @str: str to add
- * @buffer_pos: pointer to buffer first empty position
- *
- * Return: if buffer filled and emptyed return number of printed char
- * else 0
- */
-int buffer_add(char buffer[], char *str, unsigned int *buffer_pos)
-{
-	int i = 0;
-	unsigned int count = 0, pos = *buffer_pos, size = BUFFER_SIZE;
-
-	while (str && str[i])
-	{
-		if (pos == size)
-		{
-			count += buffer_print(buffer, pos);
-			pos = 0;
-		}
-		buffer[pos++] = str[i++];
-	}
-	*buffer_pos = pos;
-	return (count);
-}
-
-/**
- * _printf - produces output according to a format
- * @format: character string
- *
- * Return: the number of characters printed excluding the null byte
- * used to end output to strings
- */
+  *_printf - prints formatted output.
+  *@format: input.
+  *
+  *Return: number of chars printed or -1.
+  */
 int _printf(const char *format, ...)
 {
-	va_list ap;
-	unsigned int i = 0, buffer_pos = 0, count = 0;
-	char *res_str, *aux, buffer[BUFFER_SIZE];
+	va_list args;
+	int i, len;
+	int (*get_ptr)(va_list, int);
 
-	if (!format || !format[0])
+	va_start(args, format);
+	if (!(format))
 		return (-1);
-	va_start(ap, format);
-	aux = malloc(sizeof(char) * 2);
+	i = 0;
+	len = 0;
 	while (format && format[i])
 	{
 		if (format[i] == '%')
 		{
-			res_str = treat_format(format, &i, ap);
-			count += buffer_add(buffer, res_str, &buffer_pos);
-			free(res_str);
+			i++;
+			if (format[i] == '%')
+			{
+				len += _putchar(format[i]);
+				i++;
+				continue;
+			}
+			if (format[i] == '\0')
+				return (-1);
+			get_ptr = get_print_func(format[i]);
+			if (get_ptr != NULL)
+				len = get_ptr(args, len);
+			else
+			{
+				len += _putchar(format[i - 1]);
+				len += _putchar(format[i]);
+			}
+			i++;
 		}
 		else
 		{
-			aux[0] = format[i++];
-			aux[1] = '\0';
-			count += buffer_add(buffer, aux, &buffer_pos);
+			len += _putchar(format[i]);
+			i++;
 		}
 	}
-	count += buffer_print(buffer, buffer_pos);
-	free(aux);
-	va_end(ap);
-	if (!count)
-		count = -1;
-	return (count);
+	va_end(args);
+	return (len);
 }
